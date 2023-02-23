@@ -4,9 +4,8 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
-  height: 6.5rem;
+  padding: 2rem 10rem;
 `
 
 export const ActionsContainer = styled.div`
@@ -25,6 +24,7 @@ export const ActionsContainer = styled.div`
     color: ${(props) => props.theme['purple-dark']};
     background: ${(props) => props.theme['purple-light']};
     border-radius: 0.375rem;
+    line-height: 1.3;
   }
 
   > svg {
@@ -32,5 +32,9 @@ export const ActionsContainer = styled.div`
     padding: 0.5rem;
     background: ${(props) => props.theme['yellow-light']};
     border-radius: 0.375rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `
