@@ -1,4 +1,5 @@
 import { ShoppingCart, MapPin } from 'phosphor-react'
+import { NavLink } from 'react-router-dom'
 import coffeeLogo from '../../assets/coffee-delivery-logo.svg'
 import { ActionsContainer, HeaderContainer } from './styles'
 
@@ -13,7 +14,9 @@ export function Header() {
           <span>Recife, PE</span>
         </div>
 
-        <ShoppingCart size={38} weight="fill" />
+        <NavLink to="/checkout" title="Checkout">
+          <ShoppingCart size={38} weight="fill" />
+        </NavLink>
       </ActionsContainer>
     </HeaderContainer>
   )
