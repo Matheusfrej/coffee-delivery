@@ -27,6 +27,9 @@ export const ActionsContainer = styled.div`
     line-height: 1.3;
   }
 
+  a {
+    line-height: 0;
+  }
   a > svg {
     color: ${(props) => props.theme['yellow-dark']};
     padding: 0.5rem;

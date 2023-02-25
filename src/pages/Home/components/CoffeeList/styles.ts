@@ -27,7 +27,7 @@ export const Card = styled.div`
   width: 16rem;
   /* height: 19.375rem; */
   background: ${(props) => props.theme['base-card']};
-  border-radius: 0.375rem 2.25rem;
+  border-radius: 6px 36px;
 
   display: flex;
   flex-direction: column;
@@ -55,7 +55,7 @@ export const CardHeader = styled.header`
     font-weight: bold;
     color: ${(props) => props.theme['yellow-dark']};
     padding: 0.25rem 0.5rem;
-    border-radius: 6.25rem;
+    border-radius: 100px;
     margin-top: 0.75rem;
 
     background: ${(props) => props.theme['yellow-light']};
@@ -127,7 +127,7 @@ export const Actions = styled.div`
     flex: 1;
     width: 4.5rem;
     border: none;
-    border-radius: 0.375rem;
+    border-radius: 6px;
     padding: 0.5rem;
     background: ${(props) => props.theme['base-button']};
     color: ${(props) => props.theme['base-title']};
@@ -138,6 +138,6 @@ export const Actions = styled.div`
     padding: 0.5rem;
     color: ${(props) => props.theme['base-card']};
     background: ${(props) => props.theme['purple-dark']};
-    border-radius: 0.375rem;
+    border-radius: 6px;
   }
 `
