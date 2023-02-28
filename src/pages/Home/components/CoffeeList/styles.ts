@@ -139,5 +139,11 @@ export const Actions = styled.div`
     color: ${(props) => props.theme['base-card']};
     background: ${(props) => props.theme['purple-dark']};
     border-radius: 6px;
+
+    transition: background-color 0.1s;
+
+    &:hover {
+      background: ${(props) => props.theme.purple};
+    }
   }
 `

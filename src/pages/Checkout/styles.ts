@@ -13,8 +13,11 @@ export const CheckoutContainer = styled.div`
   }
 `
 
-export const AddressAndPaymentContainer = styled.div`
-  margin-top: 0.938rem;
+export const AddressAndPayment = styled.div`
+  width: 40rem;
+`
+
+export const BaseCardContainer = styled.div`
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -22,7 +25,15 @@ export const AddressAndPaymentContainer = styled.div`
   border-radius: 6px;
 `
 
-export const AddressContainer = styled.div`
+export const AddressCardContainer = styled(BaseCardContainer)`
+  margin-top: 0.938rem;
+`
+
+export const PaymentCardContainer = styled(BaseCardContainer)`
+  margin-top: 0.75rem;
+`
+
+export const BaseCardHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -52,6 +63,14 @@ export const AddressContainer = styled.div`
         color: ${(props) => props.theme['base-text']};
       }
     }
+  }
+`
+
+export const AddressContainer = styled(BaseCardHeader)``
+
+export const PaymentContainer = styled(BaseCardHeader)`
+  header svg {
+    color: ${(props) => props.theme.purple};
   }
 `
 
@@ -88,16 +107,53 @@ export const BaseInput = styled.input`
   }
 `
 
-export const CepInput = styled(BaseInput)`
+export const MediumInput = styled(BaseInput)`
   width: 12.5rem;
 `
 
-export const ComplementInput = styled(BaseInput)`
+export const SmallInput = styled(BaseInput)`
+  width: 3.75rem;
+`
+
+export const AdjustableInput = styled(BaseInput)`
   flex: 1;
 `
 
-export const PaymentContainer = styled.div``
-
 export const ConfirmationContainer = styled.div`
   width: 28rem;
+`
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 0.75rem;
+`
+
+export const BaseButton = styled.button`
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+  align-items: center;
+  flex: 1;
+
+  background: ${(props) => props.theme['base-button']};
+
+  svg {
+    color: ${(props) => props.theme.purple};
+  }
+
+  span {
+    line-height: 1.6;
+    font-size: 0.75rem;
+    color: ${(props) => props.theme['base-text']};
+  }
+
+  &:hover {
+    background: ${(props) => props.theme['base-hover']};
+
+    span {
+      color: ${(props) => props.theme['base-subtitle']};
+    }
+  }
 `
