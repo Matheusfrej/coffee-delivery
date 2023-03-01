@@ -124,7 +124,7 @@ export const Actions = styled.div`
   }
 
   input {
-    flex: 1;
+    /* flex: 1; */
     width: 4.5rem;
     border: none;
     border-radius: 6px;

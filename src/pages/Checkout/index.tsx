@@ -4,6 +4,7 @@ import {
   CurrencyDollar,
   MapPinLine,
   Money,
+  Trash,
 } from 'phosphor-react'
 import {
   AddressContainer,
@@ -20,7 +21,13 @@ import {
   ButtonsContainer,
   BaseButton,
   AddressAndPayment,
+  CoffeesSelectedContainer,
+  CoffeeCard,
+  CoffeeSelectionContainer,
+  DeleteButton,
 } from './styles'
+import expressoImg from '../../assets/coffees/Expresso.svg'
+import { NumberInput } from '../../components/NumberInput'
 
 export function Checkout() {
   return (
@@ -92,10 +99,37 @@ export function Checkout() {
           </PaymentContainer>
         </PaymentCardContainer>
       </AddressAndPayment>
-      <div>
+      <CoffeesSelectedContainer>
         <strong>Cafés selecionados</strong>
-        <ConfirmationContainer></ConfirmationContainer>
-      </div>
+        <ConfirmationContainer>
+          <CoffeeSelectionContainer>
+            <CoffeeCard>
+              <img src={expressoImg} alt="" />
+              <span>Expresso Tradicional</span>
+              <NumberInput />
+              <DeleteButton>
+                <Trash size={16} />
+                <span>DINHEIRO</span>
+              </DeleteButton>
+            </CoffeeCard>
+            <span>R$ 9,90</span>
+          </CoffeeSelectionContainer>
+          <hr />
+          <CoffeeSelectionContainer>
+            <CoffeeCard>
+              <img src={expressoImg} alt="" />
+              <span>Expresso Tradicional</span>
+              <NumberInput />
+              <DeleteButton>
+                <Trash size={16} />
+                <span>DINHEIRO</span>
+              </DeleteButton>
+            </CoffeeCard>
+            <span>R$ 9,90</span>
+          </CoffeeSelectionContainer>
+          <hr />
+        </ConfirmationContainer>
+      </CoffeesSelectedContainer>
     </CheckoutContainer>
   )
 }

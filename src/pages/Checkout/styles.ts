@@ -119,10 +119,6 @@ export const AdjustableInput = styled(BaseInput)`
   flex: 1;
 `
 
-export const ConfirmationContainer = styled.div`
-  width: 28rem;
-`
-
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 0.75rem;
@@ -136,6 +132,7 @@ export const BaseButton = styled.button`
   border-radius: 6px;
   align-items: center;
   flex: 1;
+  cursor: pointer;
 
   background: ${(props) => props.theme['base-button']};
 
@@ -154,6 +151,35 @@ export const BaseButton = styled.button`
 
     span {
       color: ${(props) => props.theme['base-subtitle']};
+    }
+  }
+`
+
+export const CoffeesSelectedContainer = styled.div``
+
+export const ConfirmationContainer = styled.div`
+  width: 28rem;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`
+
+export const CoffeeSelectionContainer = styled.div``
+
+export const CoffeeCard = styled.div`
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+`
+
+export const DeleteButton = styled(BaseButton)`
+  height: 2rem;
+  padding: 0 0.5rem;
+  &:hover {
+    svg {
+      color: ${(props) => props.theme['purple-dark']};
     }
   }
 `

@@ -11,6 +11,7 @@ import expressoImg from '../../../../assets/coffees/Expresso.svg'
 import expressoAmericanoImg from '../../../../assets/coffees/Americano.svg'
 
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { NumberInput } from '../../../../components/NumberInput'
 
 export function CoffeeList() {
   return (
@@ -61,15 +62,7 @@ export function CoffeeList() {
               <span>R$</span>9,90
             </strong>
             <Actions>
-              <div>
-                <input type="number" />
-                <span>
-                  <Minus size={14} weight="bold" />
-                </span>
-                <span>
-                  <Plus size={14} weight="bold" />
-                </span>
-              </div>
+              <NumberInput />
               <ShoppingCart size={38} weight="fill" />
             </Actions>
           </CardFooter>
