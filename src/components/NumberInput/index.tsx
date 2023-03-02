@@ -1,10 +1,14 @@
 import { Minus, Plus } from 'phosphor-react'
 import { NumberInputContainer } from './styles'
 
-export function NumberInput() {
+interface NumberInputProps {
+  height: number
+}
+
+export function NumberInput({ height }: NumberInputProps) {
   return (
     <NumberInputContainer>
-      <input type="number" />
+      <input type="number" style={{ height }} />
       <span>
         <Minus size={14} weight="bold" />
       </span>

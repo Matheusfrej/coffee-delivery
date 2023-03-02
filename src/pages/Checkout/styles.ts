@@ -133,6 +133,7 @@ export const BaseButton = styled.button`
   align-items: center;
   flex: 1;
   cursor: pointer;
+  transition: background-color 0.1s;
 
   background: ${(props) => props.theme['base-button']};
 
@@ -163,14 +164,63 @@ export const ConfirmationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  background: ${(props) => props.theme['base-card']};
+  margin-top: 0.938rem;
+  border-radius: 0.375rem 2.75rem;
+
+  hr {
+    border: 1px solid ${(props) => props.theme['base-button']};
+  }
+
+  > button {
+    background: ${(props) => props.theme.yellow};
+    font-weight: bold;
+    line-height: 1.6;
+    font-size: 0.875rem;
+    color: ${(props) => props.theme.white};
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem 0.5rem;
+    transition: background-color 0.1s;
+    cursor: pointer;
+
+    :hover {
+      background: ${(props) => props.theme['yellow-dark']};
+    }
+  }
 `
 
-export const CoffeeSelectionContainer = styled.div``
+export const CoffeeSelectionContainer = styled.div`
+  padding: 0.5rem 0.25rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  > span {
+    font-weight: bold;
+  }
+`
 
 export const CoffeeCard = styled.div`
   img {
     width: 4rem;
     height: 4rem;
+  }
+  display: flex;
+  gap: 1.25rem;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    > span {
+      color: ${(props) => props.theme['base-subtitle']};
+    }
+    > div {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+    }
   }
 `
 
@@ -181,5 +231,28 @@ export const DeleteButton = styled(BaseButton)`
     svg {
       color: ${(props) => props.theme['purple-dark']};
     }
+  }
+`
+
+export const Prices = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    color: ${(props) => props.theme['base-text']};
+    font-size: 0.875rem;
+
+    span {
+      font-size: 1rem;
+    }
+  }
+
+  div:last-child {
+    color: ${(props) => props.theme['base-subtitle']};
+    font-weight: bold;
+    font-size: 1.25rem;
   }
 `

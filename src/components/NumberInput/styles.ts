@@ -31,7 +31,6 @@ export const NumberInputContainer = styled.div`
 
   input {
     width: 4.5rem;
-    height: 2rem;
     border: none;
     border-radius: 6px;
     padding: 0.5rem;

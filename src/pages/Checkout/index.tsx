@@ -25,8 +25,12 @@ import {
   CoffeeCard,
   CoffeeSelectionContainer,
   DeleteButton,
+  Prices,
 } from './styles'
+
 import expressoImg from '../../assets/coffees/Expresso.svg'
+import latteImg from '../../assets/coffees/Latte.svg'
+
 import { NumberInput } from '../../components/NumberInput'
 
 export function Checkout() {
@@ -100,34 +104,57 @@ export function Checkout() {
         </PaymentCardContainer>
       </AddressAndPayment>
       <CoffeesSelectedContainer>
-        <strong>Cafés selecionados</strong>
+        <h2>Cafés selecionados</h2>
         <ConfirmationContainer>
           <CoffeeSelectionContainer>
             <CoffeeCard>
               <img src={expressoImg} alt="" />
-              <span>Expresso Tradicional</span>
-              <NumberInput />
-              <DeleteButton>
-                <Trash size={16} />
-                <span>DINHEIRO</span>
-              </DeleteButton>
+              <div>
+                <span>Expresso Tradicional</span>
+                <div>
+                  <NumberInput height={32} />
+                  <DeleteButton>
+                    <Trash size={16} />
+                    <span>REMOVER</span>
+                  </DeleteButton>
+                </div>
+              </div>
             </CoffeeCard>
             <span>R$ 9,90</span>
           </CoffeeSelectionContainer>
           <hr />
           <CoffeeSelectionContainer>
             <CoffeeCard>
-              <img src={expressoImg} alt="" />
-              <span>Expresso Tradicional</span>
-              <NumberInput />
-              <DeleteButton>
-                <Trash size={16} />
-                <span>DINHEIRO</span>
-              </DeleteButton>
+              <img src={latteImg} alt="" />
+              <div>
+                <span>Latte</span>
+                <div>
+                  <NumberInput height={32} />
+                  <DeleteButton>
+                    <Trash size={16} />
+                    <span>REMOVER</span>
+                  </DeleteButton>
+                </div>
+              </div>
             </CoffeeCard>
-            <span>R$ 9,90</span>
+            <span>R$ 19,80</span>
           </CoffeeSelectionContainer>
           <hr />
+          <Prices>
+            <div>
+              <p>Total de itens</p>
+              <span>R$ 29,70</span>
+            </div>
+            <div>
+              <p>Entrega</p>
+              <span>R$ 3,50</span>
+            </div>
+            <div>
+              <p>Total</p>
+              <strong>R$ 33,20</strong>
+            </div>
+          </Prices>
+          <button>CONFIRMAR PEDIDO</button>
         </ConfirmationContainer>
       </CoffeesSelectedContainer>
     </CheckoutContainer>
