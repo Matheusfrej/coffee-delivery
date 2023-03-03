@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const NumberInputContainer = styled.div`
+interface NumberInputContainerProps {
+  height: number
+}
+
+export const NumberInputContainer = styled.div<NumberInputContainerProps>`
   display: flex;
   align-items: center;
 
@@ -31,6 +35,7 @@ export const NumberInputContainer = styled.div`
 
   input {
     width: 4.5rem;
+    height: ${(props) => props.height}rem;
     border: none;
     border-radius: 6px;
     padding: 0.5rem;

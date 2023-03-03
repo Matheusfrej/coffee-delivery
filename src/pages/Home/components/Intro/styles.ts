@@ -52,7 +52,7 @@ export const Advantages = styled.div`
 
     svg {
       padding: 0.5rem;
-      color: ${(props) => props.theme.white};
+      color: ${(props) => props.theme['base-background']};
       border-radius: 50%;
     }
   }

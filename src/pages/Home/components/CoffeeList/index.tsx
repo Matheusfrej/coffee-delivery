@@ -33,7 +33,7 @@ export function CoffeeList() {
               <span>R$</span>9,90
             </strong>
             <Actions>
-              <NumberInput height={38} />
+              <NumberInput height={2.375} />
               <ShoppingCart size={38} weight="fill" />
             </Actions>
           </CardFooter>
@@ -54,7 +54,7 @@ export function CoffeeList() {
               <span>R$</span>9,90
             </strong>
             <Actions>
-              <NumberInput height={38} />
+              <NumberInput height={2.375} />
               <ShoppingCart size={38} weight="fill" />
             </Actions>
           </CardFooter>

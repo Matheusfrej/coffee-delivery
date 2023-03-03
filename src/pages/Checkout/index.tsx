@@ -32,6 +32,7 @@ import expressoImg from '../../assets/coffees/Expresso.svg'
 import latteImg from '../../assets/coffees/Latte.svg'
 
 import { NumberInput } from '../../components/NumberInput'
+import { NavLink } from 'react-router-dom'
 
 export function Checkout() {
   return (
@@ -112,7 +113,7 @@ export function Checkout() {
               <div>
                 <span>Expresso Tradicional</span>
                 <div>
-                  <NumberInput height={32} />
+                  <NumberInput height={2} />
                   <DeleteButton>
                     <Trash size={16} />
                     <span>REMOVER</span>
@@ -129,7 +130,7 @@ export function Checkout() {
               <div>
                 <span>Latte</span>
                 <div>
-                  <NumberInput height={32} />
+                  <NumberInput height={2} />
                   <DeleteButton>
                     <Trash size={16} />
                     <span>REMOVER</span>
@@ -154,7 +155,9 @@ export function Checkout() {
               <strong>R$ 33,20</strong>
             </div>
           </Prices>
-          <button>CONFIRMAR PEDIDO</button>
+          <NavLink to="/success" title="Confirmar">
+            <button>CONFIRMAR PEDIDO</button>
+          </NavLink>
         </ConfirmationContainer>
       </CoffeesSelectedContainer>
     </CheckoutContainer>

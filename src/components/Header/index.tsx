@@ -6,7 +6,9 @@ import { ActionsContainer, HeaderContainer } from './styles'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={coffeeLogo} alt="Logo da Coffee Delivery" />
+      <NavLink to="/" title="Home">
+        <img src={coffeeLogo} alt="Logo da Coffee Delivery" />
+      </NavLink>
 
       <ActionsContainer>
         <div>

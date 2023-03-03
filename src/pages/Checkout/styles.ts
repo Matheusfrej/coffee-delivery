@@ -172,7 +172,8 @@ export const ConfirmationContainer = styled.div`
     border: 1px solid ${(props) => props.theme['base-button']};
   }
 
-  > button {
+  > a > button {
+    width: 100%;
     background: ${(props) => props.theme.yellow};
     font-weight: bold;
     line-height: 1.6;
