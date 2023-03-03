@@ -5,6 +5,7 @@ export const IntroContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 34rem;
+  background-size: 100%;
 `
 
 export const IntroMainContainer = styled(IntroContainer)`
