@@ -1,4 +1,4 @@
-enum TagTypes {
+export enum TagTypes {
   'TRADICIONAL' = 'TRADICIONAL',
   'COM LEITE' = 'COM LEITE',
   'GELADO' = 'GELADO',
@@ -26,5 +26,5 @@ interface CoffeesState {
 }
 
 export function coffeesReducer(state: CoffeesState, action: any) {
-
+  return state
 }

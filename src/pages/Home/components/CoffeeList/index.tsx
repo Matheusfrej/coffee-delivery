@@ -9,224 +9,91 @@ import {
 
 import expressoImg from '../../../../assets/coffees/Expresso.svg'
 import expressoAmericanoImg from '../../../../assets/coffees/Americano.svg'
+import expressoCremosoImg from '../../../../assets/coffees/ExpressoCremoso.svg'
+import expressoGeladoImg from '../../../../assets/coffees/CaféGelado.svg'
+import cafeComLeiteImg from '../../../../assets/coffees/CafécomLeite.svg'
+import latteImg from '../../../../assets/coffees/Latte.svg'
+import CapuccinoImg from '../../../../assets/coffees/Capuccino.svg'
+import macchiatoImg from '../../../../assets/coffees/Macchiato.svg'
+import mocaccinoImg from '../../../../assets/coffees/Mocaccino.svg'
+import chocolateQuenteImg from '../../../../assets/coffees/ChocolateQuente.svg'
+import cubanoImg from '../../../../assets/coffees/Cubano.svg'
+import havaianoImg from '../../../../assets/coffees/Havaiano.svg'
+import arabeImg from '../../../../assets/coffees/Árabe.svg'
+import irlandesImg from '../../../../assets/coffees/Irlandês.svg'
 
 import { ShoppingCart } from 'phosphor-react'
 import { NumberInput } from '../../../../components/NumberInput'
+import { useContext } from 'react'
+import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 
 export function CoffeeList() {
+  const { coffees } = useContext(CoffeesContext)
+
+  const handleCoffeeImage = (img: string) => {
+    if (img === 'Expresso.svg') {
+      return expressoImg
+    } else if (img === 'Americano.svg') {
+      return expressoAmericanoImg
+    } else if (img === 'ExpressoCremoso.svg') {
+      return expressoCremosoImg
+    } else if (img === 'CaféGelado.svg') {
+      return expressoGeladoImg
+    } else if (img === 'CafécomLeite.svg') {
+      return cafeComLeiteImg
+    } else if (img === 'Latte.svg') {
+      return latteImg
+    } else if (img === 'Capuccino.svg') {
+      return CapuccinoImg
+    } else if (img === 'Macchiato.svg') {
+      return macchiatoImg
+    } else if (img === 'Mocaccino.svg') {
+      return mocaccinoImg
+    } else if (img === 'ChocolateQuente.svg') {
+      return chocolateQuenteImg
+    } else if (img === 'Cubano.svg') {
+      return cubanoImg
+    } else if (img === 'Havaiano.svg') {
+      return havaianoImg
+    } else if (img === 'Árabe.svg') {
+      return arabeImg
+    } else if (img === 'Irlandês.svg') {
+      return irlandesImg
+    }
+    return expressoImg
+  }
+
   return (
     <CoffeeListContainer>
       <strong>Nossos cafés</strong>
       <CoffeeCardsContainer>
-        <Card>
-          <CardHeader>
-            <img src={expressoImg} alt="" />
+        {coffees.map((coffee) => {
+          return (
+            <Card key={coffee.id}>
+              <CardHeader>
+                <img src={handleCoffeeImage(coffee.img)} alt="" />
 
-            <ul>
-              <li>TRADICIONAL</li>
-            </ul>
-            <strong>Expresso Tradicional</strong>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-          </CardHeader>
-          <CardFooter>
-            <strong>
-              <span>R$</span>9,90
-            </strong>
-            <Actions>
-              <NumberInput height={2.375} />
-              <ShoppingCart size={38} weight="fill" />
-            </Actions>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src={expressoAmericanoImg} alt="" />
-
-            <ul>
-              <li>TRADICIONAL</li>
-            </ul>
-            <strong>Expresso Americano</strong>
-            <p>Expresso diluído, menos intenso que o tradicional</p>
-          </CardHeader>
-          <CardFooter>
-            <strong>
-              <span>R$</span>9,90
-            </strong>
-            <Actions>
-              <NumberInput height={2.375} />
-              <ShoppingCart size={38} weight="fill" />
-            </Actions>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <img src="" alt="" />
-            <span></span>
-            <strong></strong>
-            <p></p>
-          </CardHeader>
-          <CardFooter>
-            <span></span>
-            <input type="number" />
-            <button></button>
-          </CardFooter>
-        </Card>
+                <ul>
+                  {coffee.tags.map((tag) => {
+                    return <li key={coffee.id}>{tag}</li>
+                  })}
+                </ul>
+                <strong>{coffee.name}</strong>
+                <p>{coffee.description}</p>
+              </CardHeader>
+              <CardFooter>
+                <strong>
+                  <span>R$</span>
+                  {coffee.price.toFixed(2).replace('.', ',')}
+                </strong>
+                <Actions>
+                  <NumberInput height={2.375} />
+                  <ShoppingCart size={38} weight="fill" />
+                </Actions>
+              </CardFooter>
+            </Card>
+          )
+        })}
       </CoffeeCardsContainer>
     </CoffeeListContainer>
   )

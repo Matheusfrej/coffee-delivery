@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const CoffeeListContainer = styled.div`
   margin: 0 10rem;
+  margin-bottom: 10rem;
   display: flex;
   flex-direction: column;
   gap: 3.375rem;
