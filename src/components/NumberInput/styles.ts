@@ -4,7 +4,7 @@ interface NumberInputContainerProps {
   height: number
 }
 
-export const NumberInputContainer = styled.div<NumberInputContainerProps>`
+export const NumberInputContainer = styled.form<NumberInputContainerProps>`
   display: flex;
   align-items: center;
 

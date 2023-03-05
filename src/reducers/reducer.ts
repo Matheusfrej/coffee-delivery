@@ -1,3 +1,6 @@
+import produce from "immer"
+import { ActionsTypes } from "./actions"
+
 export enum TagTypes {
   'TRADICIONAL' = 'TRADICIONAL',
   'COM LEITE' = 'COM LEITE',
@@ -26,5 +29,17 @@ interface CoffeesState {
 }
 
 export function coffeesReducer(state: CoffeesState, action: any) {
-  return state
+  switch (action.type) {
+    case ActionsTypes.ADD_OR_MODIFY_ITEM_TO_CART:
+      return produce(state, (draft) => {
+        const coffeeCartIndex = draft.cart.findIndex((coffee) => coffee.coffeeId === action.payload.coffeeAndQuantity.coffeeId)
+        if (coffeeCartIndex == -1) {
+          draft.cart.push(action.payload.coffeeAndQuantity)
+        } else {
+          draft.cart[coffeeCartIndex] = action.payload.coffeeAndQuantity
+        }
+      })
+    default:
+      return state
+  }
 }

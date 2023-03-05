@@ -96,7 +96,7 @@ export const CardFooter = styled.footer`
   }
 `
 
-export const Actions = styled.div`
+export const Actions = styled.form`
   display: flex;
   gap: 0.5rem;
 
@@ -108,20 +108,6 @@ export const Actions = styled.div`
   div {
     display: flex;
     align-items: center;
-
-    span:nth-child(2) {
-      svg {
-        color: ${(props) => props.theme.purple};
-        margin-left: calc(0px - 4rem);
-      }
-    }
-
-    span:last-child {
-      svg {
-        color: ${(props) => props.theme.purple};
-        margin-left: calc(0px - 1.375rem);
-      }
-    }
   }
 
   input {
@@ -135,7 +121,12 @@ export const Actions = styled.div`
     text-align: center;
   }
 
-  > svg {
+  button {
+    border: none;
+    line-height: 0;
+  }
+
+  > button > svg {
     padding: 0.5rem;
     color: ${(props) => props.theme['base-card']};
     background: ${(props) => props.theme['purple-dark']};

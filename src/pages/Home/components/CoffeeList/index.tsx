@@ -24,11 +24,11 @@ import irlandesImg from '../../../../assets/coffees/Irlandês.svg'
 
 import { ShoppingCart } from 'phosphor-react'
 import { NumberInput } from '../../../../components/NumberInput'
-import { useContext } from 'react'
+import { FormEvent, useContext } from 'react'
 import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 
 export function CoffeeList() {
-  const { coffees } = useContext(CoffeesContext)
+  const { coffees, addOrModifyItemToCart } = useContext(CoffeesContext)
 
   const handleCoffeeImage = (img: string) => {
     if (img === 'Expresso.svg') {
@@ -63,6 +63,13 @@ export function CoffeeList() {
     return expressoImg
   }
 
+  const handleAddorModifyItemToCart =
+    (coffeeId: string) => (event: FormEvent) => {
+      event.preventDefault()
+      addOrModifyItemToCart()
+      console.log('enviou')
+    }
+
   return (
     <CoffeeListContainer>
       <strong>Nossos cafés</strong>
@@ -75,7 +82,7 @@ export function CoffeeList() {
 
                 <ul>
                   {coffee.tags.map((tag) => {
-                    return <li key={coffee.id}>{tag}</li>
+                    return <li key={(coffee.name, tag)}>{tag}</li>
                   })}
                 </ul>
                 <strong>{coffee.name}</strong>
@@ -86,9 +93,11 @@ export function CoffeeList() {
                   <span>R$</span>
                   {coffee.price.toFixed(2).replace('.', ',')}
                 </strong>
-                <Actions>
+                <Actions onSubmit={handleAddorModifyItemToCart(coffee.id)}>
                   <NumberInput height={2.375} />
-                  <ShoppingCart size={38} weight="fill" />
+                  <button type="submit">
+                    <ShoppingCart size={38} weight="fill" />
+                  </button>
                 </Actions>
               </CardFooter>
             </Card>

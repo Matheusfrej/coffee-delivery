@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useReducer } from 'react'
+import { addOrModifyItemToCartAction } from '../reducers/actions'
 import {
   CoffeeAndQuantity,
   coffeesReducer,
@@ -9,6 +10,7 @@ import {
 interface CoffeesContextType {
   coffees: CoffeeType[]
   cart: CoffeeAndQuantity[]
+  addOrModifyItemToCart: (coffeeId: string, quantity: number) => void
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -147,11 +149,21 @@ export function CoffeesContextProvider({
 
   const { coffees, cart } = coffeesState
 
+  const addOrModifyItemToCart = (coffeeId: string, quantity: number) => {
+    const newCoffeeAndQuantity: CoffeeAndQuantity = {
+      coffeeId,
+      quantity,
+    }
+
+    dispatch(addOrModifyItemToCartAction(newCoffeeAndQuantity))
+  }
+
   return (
     <CoffeesContext.Provider
       value={{
         coffees,
         cart,
+        addOrModifyItemToCart,
       }}
     >
       {children}
