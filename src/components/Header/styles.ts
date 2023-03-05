@@ -40,4 +40,23 @@ export const ActionsContainer = styled.div`
       cursor: pointer;
     }
   }
+
+  > span {
+    display: flex;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: ${(props) => props.theme['yellow-dark']};
+      color: ${(props) => props.theme.white};
+      width: 1.25rem;
+      height: 1.25rem;
+      line-height: 1;
+      margin-top: calc(0px - 0.625rem);
+      margin-left: calc(0px - 0.625rem);
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+  }
 `

@@ -5,25 +5,26 @@ import { NumberInputContainer } from './styles'
 interface NumberInputProps {
   height?: number
   coffeeId: string
+  page: string
 }
 
-export function NumberInput({ height = 2, coffeeId }: NumberInputProps) {
+export function NumberInput({ height = 2, coffeeId, page }: NumberInputProps) {
   const { coffees, subtractQuantity, increaseQuantity, modifyQuantity } =
     useContext(CoffeesContext)
 
   const [currentQuantity, setCurrentQuantity] = useState(1)
 
   const handleSubtractQuantity = () => {
-    subtractQuantity(coffeeId)
+    subtractQuantity(coffeeId, page)
   }
 
   const handleIncreaseQuantity = () => {
     console.log('chamou o increaseQuantity')
-    increaseQuantity(coffeeId)
+    increaseQuantity(coffeeId, page)
   }
 
   const handleChangeQuantity = (event: ChangeEvent<HTMLInputElement>) => {
-    modifyQuantity(coffeeId, +event.target.value)
+    modifyQuantity(coffeeId, +event.target.value, page)
   }
 
   useEffect(() => {
@@ -33,9 +34,13 @@ export function NumberInput({ height = 2, coffeeId }: NumberInputProps) {
     if (currentCoffeeIndex === -1) {
       setCurrentQuantity(1)
     } else {
-      setCurrentQuantity(coffees[currentCoffeeIndex].quantity)
+      if (page === 'list') {
+        setCurrentQuantity(coffees[currentCoffeeIndex].quantity)
+      } else {
+        setCurrentQuantity(coffees[currentCoffeeIndex].quantityOnCart)
+      }
     }
-  }, [coffees, currentQuantity, coffeeId])
+  }, [coffees, currentQuantity, coffeeId, page])
 
   return (
     <NumberInputContainer height={height}>

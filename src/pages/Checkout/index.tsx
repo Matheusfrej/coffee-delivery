@@ -28,13 +28,23 @@ import {
   Prices,
 } from './styles'
 
-import expressoImg from '../../assets/coffees/Expresso.svg'
-import latteImg from '../../assets/coffees/Latte.svg'
-
 import { NumberInput } from '../../components/NumberInput'
 import { NavLink } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { CoffeesContext } from '../../contexts/CoffeesContext'
+import { handleCoffeeImage } from '../Home/components/CoffeeList'
 
 export function Checkout() {
+  const { coffees, allItemsQuantityTo1 } = useContext(CoffeesContext)
+  const page = 'checkout'
+
+  // set all quantities to 1, only runs once
+  useEffect(() => {
+    allItemsQuantityTo1()
+    console.log('chamou')
+    console.log(coffees)
+  }, [page])
+
   return (
     <CheckoutContainer>
       <AddressAndPayment>
@@ -107,40 +117,39 @@ export function Checkout() {
       <CoffeesSelectedContainer>
         <h2>Cafés selecionados</h2>
         <ConfirmationContainer>
-          <CoffeeSelectionContainer>
-            <CoffeeCard>
-              <img src={expressoImg} alt="" />
-              <div>
-                <span>Expresso Tradicional</span>
-                <div>
-                  <NumberInput height={2} />
-                  <DeleteButton>
-                    <Trash size={16} />
-                    <span>REMOVER</span>
-                  </DeleteButton>
-                </div>
-              </div>
-            </CoffeeCard>
-            <span>R$ 9,90</span>
-          </CoffeeSelectionContainer>
-          <hr />
-          <CoffeeSelectionContainer>
-            <CoffeeCard>
-              <img src={latteImg} alt="" />
-              <div>
-                <span>Latte</span>
-                <div>
-                  <NumberInput height={2} />
-                  <DeleteButton>
-                    <Trash size={16} />
-                    <span>REMOVER</span>
-                  </DeleteButton>
-                </div>
-              </div>
-            </CoffeeCard>
-            <span>R$ 19,80</span>
-          </CoffeeSelectionContainer>
-          <hr />
+          {coffees.map((coffee) => {
+            return (
+              <>
+                {coffee.isOnCart && (
+                  <>
+                    <CoffeeSelectionContainer key={coffee.id}>
+                      <CoffeeCard>
+                        <img src={handleCoffeeImage(coffee.img)} alt="" />
+                        <div>
+                          <span>{coffee.name}</span>
+                          <div>
+                            <NumberInput
+                              height={2}
+                              coffeeId={coffee.id}
+                              page={page}
+                            />
+                            <DeleteButton>
+                              <Trash size={16} />
+                              <span>REMOVER</span>
+                            </DeleteButton>
+                          </div>
+                        </div>
+                      </CoffeeCard>
+                      <span>
+                        R$ {coffee.price.toFixed(2).replace('.', ',')}
+                      </span>
+                    </CoffeeSelectionContainer>
+                    <hr />
+                  </>
+                )}
+              </>
+            )
+          })}
           <Prices>
             <div>
               <p>Total de itens</p>

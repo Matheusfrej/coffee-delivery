@@ -18,12 +18,11 @@ export interface CoffeeType {
   price: number
   isOnCart: boolean
   quantity: number
-}
-interface CoffeeAndQuantity {
-
+  quantityOnCart: number
 }
 interface CoffeesState {
   coffees: CoffeeType[]
+  itemsQuantityOnCart: number
   // currentQuantity
 }
 
@@ -37,6 +36,7 @@ export function coffeesReducer(state: CoffeesState, action: any) {
       return produce(state, (draft) => {
         const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
         draft.coffees[coffeeCartIndex].isOnCart = true
+        draft.coffees[coffeeCartIndex].quantityOnCart += draft.coffees[coffeeCartIndex].quantity
       })
     }
     case ActionsTypes.INCREASE_QUANTITY: {
@@ -44,29 +44,68 @@ export function coffeesReducer(state: CoffeesState, action: any) {
 
       return produce(state, (draft) => {
         const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
-        draft.coffees[coffeeCartIndex].quantity = draft.coffees[coffeeCartIndex].quantity + 1
+        if (action.payload.page == 'list') {
+          draft.coffees[coffeeCartIndex].quantity = draft.coffees[coffeeCartIndex].quantity + 1
+        } else {
+          draft.coffees[coffeeCartIndex].quantityOnCart = draft.coffees[coffeeCartIndex].quantityOnCart + 1
+        }
       })
     }
     case ActionsTypes.SUBTRACT_QUANTITY:
       return produce(state, (draft) => {
         const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
-        if (draft.coffees[coffeeCartIndex].quantity > 1) {
-          draft.coffees[coffeeCartIndex].quantity = draft.coffees[coffeeCartIndex].quantity - 1
+        if (action.payload.page == 'list') {
+          if (draft.coffees[coffeeCartIndex].quantity > 1) {
+            draft.coffees[coffeeCartIndex].quantity = draft.coffees[coffeeCartIndex].quantity - 1
+          }
+          // se for menor ou igual a 1, não faz nada
+          draft.coffees[coffeeCartIndex].quantity += 0
+        } else {
+          if (draft.coffees[coffeeCartIndex].quantityOnCart > 1) {
+            draft.coffees[coffeeCartIndex].quantityOnCart = draft.coffees[coffeeCartIndex].quantityOnCart - 1
+          }
+          // se for menor ou igual a 1, não faz nada
+          draft.coffees[coffeeCartIndex].quantityOnCart += 0
         }
-        // se for menor ou igual a 1, não faz nada
-        draft.coffees[coffeeCartIndex].quantity += 0
+        
       })
     case ActionsTypes.MODIFY_QUANTITY:
       return produce(state, (draft) => {
         const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
-        if (action.payload.quantity >= 1) {
-          draft.coffees[coffeeCartIndex].quantity = action.payload.quantity
+        if (action.payload.page == 'list') {
+          if (action.payload.quantity >= 1) {
+            draft.coffees[coffeeCartIndex].quantity = action.payload.quantity
+          } else {
+            draft.coffees[coffeeCartIndex].quantity = 1
+          }
         } else {
-          draft.coffees[coffeeCartIndex].quantity = 1
-
+          if (action.payload.quantityOnCart >= 1) {
+            draft.coffees[coffeeCartIndex].quantityOnCart = action.payload.quantityOnCart
+          } else {
+            draft.coffees[coffeeCartIndex].quantityOnCart = 1
+          }
         }
-        // se for menor ou igual a 1, deixa como 1 que é o mínimo
+        
       })
+    case ActionsTypes.SUM_ITEMS_ON_CART:
+      return produce(state, (draft) => {
+        draft.itemsQuantityOnCart = draft.coffees.reduce((accumulator, current) => {
+          if (current.isOnCart) {
+            return accumulator + 1
+          } else {
+            return accumulator
+          }
+        }, 0)
+      })
+    case ActionsTypes.ALL_ITEMS_QUANTITY_TO_1:
+      console.log('entrou no allItemsReducer');
+      
+      return produce(state, (draft) => {
+        draft.coffees.forEach((coffee) => {
+          coffee.quantity = 1
+        })
+      })
+      
     default:
       return state
   }

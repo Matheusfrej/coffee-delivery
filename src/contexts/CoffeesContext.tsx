@@ -1,18 +1,23 @@
 import { createContext, ReactNode, useReducer } from 'react'
 import {
   addOrModifyItemToCartAction,
+  allItemsQuantityTo1Action,
   increaseQuantityAction,
   modifyQuantityAction,
   subtractQuantityAction,
+  sumItemsOnCartAction,
 } from '../reducers/actions'
 import { coffeesReducer, CoffeeType, TagTypes } from '../reducers/reducer'
 
 interface CoffeesContextType {
   coffees: CoffeeType[]
-  addOrModifyItemToCart: (coffeeId: string) => void
-  subtractQuantity: (coffeeId: string) => void
-  increaseQuantity: (coffeeId: string) => void
-  modifyQuantity: (coffeeId: string, quantity: number) => void
+  itemsQuantityOnCart: number
+  addOrModifyItemToCart: (coffeeId: string, page: string) => void
+  subtractQuantity: (coffeeId: string, page: string) => void
+  increaseQuantity: (coffeeId: string, page: string) => void
+  modifyQuantity: (coffeeId: string, quantity: number, page: string) => void
+  sumItemsOnCart: () => void
+  allItemsQuantityTo1: () => void
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -35,6 +40,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '2',
@@ -45,6 +51,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '3',
@@ -55,6 +62,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '4',
@@ -65,6 +73,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '5',
@@ -75,6 +84,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '6',
@@ -86,6 +96,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '7',
@@ -97,6 +108,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '8',
@@ -108,6 +120,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '9',
@@ -119,6 +132,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '10',
@@ -130,6 +144,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '11',
@@ -141,6 +156,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '12',
@@ -151,6 +167,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '13',
@@ -161,6 +178,7 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
       {
         id: '14',
@@ -172,36 +190,49 @@ export function CoffeesContextProvider({
         price: 9.9,
         isOnCart: false,
         quantity: 1,
+        quantityOnCart: 0,
       },
     ],
+    itemsQuantityOnCart: 0,
   })
 
-  const { coffees } = coffeesState
+  const { coffees, itemsQuantityOnCart } = coffeesState
 
   const addOrModifyItemToCart = (coffeeId: string) => {
     dispatch(addOrModifyItemToCartAction(coffeeId))
   }
 
-  const subtractQuantity = (coffeeId: string) => {
-    dispatch(subtractQuantityAction(coffeeId))
+  const subtractQuantity = (coffeeId: string, page: string) => {
+    dispatch(subtractQuantityAction(coffeeId, page))
   }
 
-  const increaseQuantity = (coffeeId: string) => {
-    dispatch(increaseQuantityAction(coffeeId))
+  const increaseQuantity = (coffeeId: string, page: string) => {
+    dispatch(increaseQuantityAction(coffeeId, page))
   }
 
-  const modifyQuantity = (coffeeId: string, quantity: number) => {
-    dispatch(modifyQuantityAction(coffeeId, quantity))
+  const modifyQuantity = (coffeeId: string, quantity: number, page: string) => {
+    dispatch(modifyQuantityAction(coffeeId, quantity, page))
+  }
+
+  const sumItemsOnCart = () => {
+    dispatch(sumItemsOnCartAction())
+  }
+
+  const allItemsQuantityTo1 = () => {
+    dispatch(allItemsQuantityTo1Action())
   }
 
   return (
     <CoffeesContext.Provider
       value={{
         coffees,
+        itemsQuantityOnCart,
         addOrModifyItemToCart,
         subtractQuantity,
         increaseQuantity,
         modifyQuantity,
+        sumItemsOnCart,
+        allItemsQuantityTo1,
       }}
     >
       {children}

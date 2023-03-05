@@ -27,46 +27,50 @@ import { NumberInput } from '../../../../components/NumberInput'
 import { FormEvent, useContext } from 'react'
 import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 
-export function CoffeeList() {
-  const { coffees, addOrModifyItemToCart } = useContext(CoffeesContext)
-
-  const handleCoffeeImage = (img: string) => {
-    if (img === 'Expresso.svg') {
-      return expressoImg
-    } else if (img === 'Americano.svg') {
-      return expressoAmericanoImg
-    } else if (img === 'ExpressoCremoso.svg') {
-      return expressoCremosoImg
-    } else if (img === 'CaféGelado.svg') {
-      return expressoGeladoImg
-    } else if (img === 'CafécomLeite.svg') {
-      return cafeComLeiteImg
-    } else if (img === 'Latte.svg') {
-      return latteImg
-    } else if (img === 'Capuccino.svg') {
-      return CapuccinoImg
-    } else if (img === 'Macchiato.svg') {
-      return macchiatoImg
-    } else if (img === 'Mocaccino.svg') {
-      return mocaccinoImg
-    } else if (img === 'ChocolateQuente.svg') {
-      return chocolateQuenteImg
-    } else if (img === 'Cubano.svg') {
-      return cubanoImg
-    } else if (img === 'Havaiano.svg') {
-      return havaianoImg
-    } else if (img === 'Árabe.svg') {
-      return arabeImg
-    } else if (img === 'Irlandês.svg') {
-      return irlandesImg
-    }
+export const handleCoffeeImage = (img: string) => {
+  if (img === 'Expresso.svg') {
     return expressoImg
+  } else if (img === 'Americano.svg') {
+    return expressoAmericanoImg
+  } else if (img === 'ExpressoCremoso.svg') {
+    return expressoCremosoImg
+  } else if (img === 'CaféGelado.svg') {
+    return expressoGeladoImg
+  } else if (img === 'CafécomLeite.svg') {
+    return cafeComLeiteImg
+  } else if (img === 'Latte.svg') {
+    return latteImg
+  } else if (img === 'Capuccino.svg') {
+    return CapuccinoImg
+  } else if (img === 'Macchiato.svg') {
+    return macchiatoImg
+  } else if (img === 'Mocaccino.svg') {
+    return mocaccinoImg
+  } else if (img === 'ChocolateQuente.svg') {
+    return chocolateQuenteImg
+  } else if (img === 'Cubano.svg') {
+    return cubanoImg
+  } else if (img === 'Havaiano.svg') {
+    return havaianoImg
+  } else if (img === 'Árabe.svg') {
+    return arabeImg
+  } else if (img === 'Irlandês.svg') {
+    return irlandesImg
   }
+  return expressoImg
+}
+
+export function CoffeeList() {
+  const { coffees, addOrModifyItemToCart, sumItemsOnCart } =
+    useContext(CoffeesContext)
+
+  const page = 'list'
 
   const handleAddorModifyItemToCart =
     (coffeeId: string) => (event: FormEvent) => {
       event.preventDefault()
-      addOrModifyItemToCart(coffeeId)
+      addOrModifyItemToCart(coffeeId, page)
+      sumItemsOnCart()
       console.log(coffees)
     }
 
@@ -94,7 +98,11 @@ export function CoffeeList() {
                   {coffee.price.toFixed(2).replace('.', ',')}
                 </strong>
                 <Actions>
-                  <NumberInput height={2.375} coffeeId={coffee.id} />
+                  <NumberInput
+                    height={2.375}
+                    coffeeId={coffee.id}
+                    page={page}
+                  />
                   <button
                     type="submit"
                     onClick={handleAddorModifyItemToCart(coffee.id)}
