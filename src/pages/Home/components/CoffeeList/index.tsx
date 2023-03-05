@@ -28,7 +28,7 @@ import { FormEvent, useContext } from 'react'
 import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 
 export function CoffeeList() {
-  const { coffees /* addOrModifyItemToCart */ } = useContext(CoffeesContext)
+  const { coffees, addOrModifyItemToCart } = useContext(CoffeesContext)
 
   const handleCoffeeImage = (img: string) => {
     if (img === 'Expresso.svg') {
@@ -66,8 +66,8 @@ export function CoffeeList() {
   const handleAddorModifyItemToCart =
     (coffeeId: string) => (event: FormEvent) => {
       event.preventDefault()
-      // addOrModifyItemToCart()
-      console.log('enviou')
+      addOrModifyItemToCart(coffeeId)
+      console.log(coffees)
     }
 
   return (
@@ -93,9 +93,12 @@ export function CoffeeList() {
                   <span>R$</span>
                   {coffee.price.toFixed(2).replace('.', ',')}
                 </strong>
-                <Actions onSubmit={handleAddorModifyItemToCart(coffee.id)}>
-                  <NumberInput height={2.375} />
-                  <button type="submit">
+                <Actions>
+                  <NumberInput height={2.375} coffeeId={coffee.id} />
+                  <button
+                    type="submit"
+                    onClick={handleAddorModifyItemToCart(coffee.id)}
+                  >
                     <ShoppingCart size={38} weight="fill" />
                   </button>
                 </Actions>

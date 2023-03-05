@@ -1,16 +1,18 @@
 import { createContext, ReactNode, useReducer } from 'react'
-import { addOrModifyItemToCartAction } from '../reducers/actions'
 import {
-  CoffeeAndQuantity,
-  coffeesReducer,
-  CoffeeType,
-  TagTypes,
-} from '../reducers/reducer'
+  addOrModifyItemToCartAction,
+  increaseQuantityAction,
+  modifyQuantityAction,
+  subtractQuantityAction,
+} from '../reducers/actions'
+import { coffeesReducer, CoffeeType, TagTypes } from '../reducers/reducer'
 
 interface CoffeesContextType {
   coffees: CoffeeType[]
-  cart: CoffeeAndQuantity[]
-  addOrModifyItemToCart: (coffeeId: string, quantity: number) => void
+  addOrModifyItemToCart: (coffeeId: string) => void
+  subtractQuantity: (coffeeId: string) => void
+  increaseQuantity: (coffeeId: string) => void
+  modifyQuantity: (coffeeId: string, quantity: number) => void
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -31,6 +33,8 @@ export function CoffeesContextProvider({
         name: 'Expresso Tradicional',
         description: 'O tradicional café feito com água quente e grãos moídos',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '2',
@@ -39,6 +43,8 @@ export function CoffeesContextProvider({
         name: 'Expresso Americano',
         description: 'Expresso diluído, menos intenso que o tradicional',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '3',
@@ -47,6 +53,8 @@ export function CoffeesContextProvider({
         name: 'Expresso Cremoso',
         description: 'Café expresso tradicional com espuma cremosa',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '4',
@@ -55,6 +63,8 @@ export function CoffeesContextProvider({
         name: 'ExpressoGelado',
         description: 'Bebida preparada com café expresso e cubos de gelo',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '5',
@@ -63,6 +73,8 @@ export function CoffeesContextProvider({
         name: 'Café com Leite',
         description: 'Meio a meio de expresso tradicional com leite vaporizado',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '6',
@@ -72,6 +84,8 @@ export function CoffeesContextProvider({
         description:
           'Uma dose de café expresso com o dobro de leite e espuma cremosa',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '7',
@@ -81,6 +95,8 @@ export function CoffeesContextProvider({
         description:
           'Bebida com canela feita de doses iguais de café, leite e espuma',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '8',
@@ -90,6 +106,8 @@ export function CoffeesContextProvider({
         description:
           'Café expresso misturado com um pouco de leite quente e espuma',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '9',
@@ -99,6 +117,8 @@ export function CoffeesContextProvider({
         description:
           'Café expresso com calda de chocolate, pouco leite e espuma',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '10',
@@ -108,6 +128,8 @@ export function CoffeesContextProvider({
         description:
           'Bebida feita com chocolate dissolvido no leite quente e café',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '11',
@@ -117,6 +139,8 @@ export function CoffeesContextProvider({
         description:
           'Drink gelado de café expresso com rum, creme de leite e hortelã',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '12',
@@ -125,6 +149,8 @@ export function CoffeesContextProvider({
         name: 'Havaiano',
         description: 'Bebida adocicada preparada com café e leite de coco',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '13',
@@ -133,6 +159,8 @@ export function CoffeesContextProvider({
         name: 'Árabe',
         description: 'Bebida preparada com grãos de café árabe e especiarias',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
       {
         id: '14',
@@ -142,28 +170,38 @@ export function CoffeesContextProvider({
         description:
           'Bebida a base de café, uísque irlandês, açúcar e chantilly',
         price: 9.9,
+        isOnCart: false,
+        quantity: 1,
       },
     ],
-    cart: [],
   })
 
-  const { coffees, cart } = coffeesState
+  const { coffees } = coffeesState
 
-  const addOrModifyItemToCart = (coffeeId: string, quantity: number) => {
-    const newCoffeeAndQuantity: CoffeeAndQuantity = {
-      coffeeId,
-      quantity,
-    }
+  const addOrModifyItemToCart = (coffeeId: string) => {
+    dispatch(addOrModifyItemToCartAction(coffeeId))
+  }
 
-    dispatch(addOrModifyItemToCartAction(newCoffeeAndQuantity))
+  const subtractQuantity = (coffeeId: string) => {
+    dispatch(subtractQuantityAction(coffeeId))
+  }
+
+  const increaseQuantity = (coffeeId: string) => {
+    dispatch(increaseQuantityAction(coffeeId))
+  }
+
+  const modifyQuantity = (coffeeId: string, quantity: number) => {
+    dispatch(modifyQuantityAction(coffeeId, quantity))
   }
 
   return (
     <CoffeesContext.Provider
       value={{
         coffees,
-        cart,
         addOrModifyItemToCart,
+        subtractQuantity,
+        increaseQuantity,
+        modifyQuantity,
       }}
     >
       {children}

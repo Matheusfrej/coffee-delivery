@@ -1,43 +1,49 @@
 import { Minus, Plus } from 'phosphor-react'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
+import { CoffeesContext } from '../../contexts/CoffeesContext'
 import { NumberInputContainer } from './styles'
 interface NumberInputProps {
   height?: number
+  coffeeId: string
 }
 
-export function NumberInput({ height = 2 }: NumberInputProps) {
-  const [quantity, setQuantity] = useState(1)
+export function NumberInput({ height = 2, coffeeId }: NumberInputProps) {
+  const { coffees, subtractQuantity, increaseQuantity, modifyQuantity } =
+    useContext(CoffeesContext)
+
+  const [currentQuantity, setCurrentQuantity] = useState(1)
 
   const handleSubtractQuantity = () => {
-    setQuantity((state) => {
-      if (state > 1) {
-        return state - 1
-      }
-      return state
-    })
+    subtractQuantity(coffeeId)
   }
 
   const handleIncreaseQuantity = () => {
-    setQuantity((state) => {
-      return state + 1
-    })
+    console.log('chamou o increaseQuantity')
+    increaseQuantity(coffeeId)
   }
 
   const handleChangeQuantity = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuantity(+event.target.value)
+    modifyQuantity(coffeeId, +event.target.value)
   }
 
-  const handleNumberInputSubmit = (event: FormEvent) => {
-    event.preventDefault()
-  }
+  useEffect(() => {
+    const currentCoffeeIndex = coffees.findIndex(
+      (coffee) => coffee.id === coffeeId,
+    )
+    if (currentCoffeeIndex === -1) {
+      setCurrentQuantity(1)
+    } else {
+      setCurrentQuantity(coffees[currentCoffeeIndex].quantity)
+    }
+  }, [coffees, currentQuantity, coffeeId])
 
   return (
-    <NumberInputContainer height={height} onSubmit={handleNumberInputSubmit}>
+    <NumberInputContainer height={height}>
       <input
         type="number"
         id="quantity"
         min={1}
-        value={quantity}
+        value={currentQuantity}
         onChange={handleChangeQuantity}
         required
       />

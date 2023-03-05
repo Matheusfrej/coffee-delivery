@@ -16,28 +16,56 @@ export interface CoffeeType {
   name: string
   description: string
   price: number
-}
-
-export interface CoffeeAndQuantity {
-  coffeeId: string
+  isOnCart: boolean
   quantity: number
 }
+interface CoffeeAndQuantity {
 
+}
 interface CoffeesState {
   coffees: CoffeeType[]
-  cart: CoffeeAndQuantity[]
+  // currentQuantity
 }
 
 export function coffeesReducer(state: CoffeesState, action: any) {
+  console.log('entrou no coffeesReducer');
+  console.log(action);
+  
+  
   switch (action.type) {
-    case ActionsTypes.ADD_OR_MODIFY_ITEM_TO_CART:
+    case ActionsTypes.ADD_OR_MODIFY_ITEM_TO_CART: {
       return produce(state, (draft) => {
-        const coffeeCartIndex = draft.cart.findIndex((coffee) => coffee.coffeeId === action.payload.coffeeAndQuantity.coffeeId)
-        if (coffeeCartIndex == -1) {
-          draft.cart.push(action.payload.coffeeAndQuantity)
-        } else {
-          draft.cart[coffeeCartIndex] = action.payload.coffeeAndQuantity
+        const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
+        draft.coffees[coffeeCartIndex].isOnCart = true
+      })
+    }
+    case ActionsTypes.INCREASE_QUANTITY: {
+      console.log('entrou no increaseQuantity')
+
+      return produce(state, (draft) => {
+        const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
+        draft.coffees[coffeeCartIndex].quantity = draft.coffees[coffeeCartIndex].quantity + 1
+      })
+    }
+    case ActionsTypes.SUBTRACT_QUANTITY:
+      return produce(state, (draft) => {
+        const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
+        if (draft.coffees[coffeeCartIndex].quantity > 1) {
+          draft.coffees[coffeeCartIndex].quantity = draft.coffees[coffeeCartIndex].quantity - 1
         }
+        // se for menor ou igual a 1, não faz nada
+        draft.coffees[coffeeCartIndex].quantity += 0
+      })
+    case ActionsTypes.MODIFY_QUANTITY:
+      return produce(state, (draft) => {
+        const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
+        if (action.payload.quantity >= 1) {
+          draft.coffees[coffeeCartIndex].quantity = action.payload.quantity
+        } else {
+          draft.coffees[coffeeCartIndex].quantity = 1
+
+        }
+        // se for menor ou igual a 1, deixa como 1 que é o mínimo
       })
     default:
       return state

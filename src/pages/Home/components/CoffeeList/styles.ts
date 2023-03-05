@@ -96,7 +96,7 @@ export const CardFooter = styled.footer`
   }
 `
 
-export const Actions = styled.form`
+export const Actions = styled.div`
   display: flex;
   gap: 0.5rem;
 
