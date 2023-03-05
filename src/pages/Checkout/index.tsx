@@ -41,8 +41,8 @@ export function Checkout() {
   // set all quantities to 1, only runs once
   useEffect(() => {
     allItemsQuantityTo1()
-    console.log('chamou')
-    console.log(coffees)
+    console.log('entrou no useeffect')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   return (
