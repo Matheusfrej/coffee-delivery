@@ -1,5 +1,5 @@
 import { Minus, Plus } from 'phosphor-react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { NumberInputContainer } from './styles'
 interface NumberInputProps {
   height?: number
@@ -27,9 +27,8 @@ export function NumberInput({ height = 2 }: NumberInputProps) {
     setQuantity(+event.target.value)
   }
 
-  const handleNumberInputSubmit = (event) => {
+  const handleNumberInputSubmit = (event: FormEvent) => {
     event.preventDefault()
-    
   }
 
   return (

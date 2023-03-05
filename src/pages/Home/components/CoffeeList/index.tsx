@@ -28,7 +28,7 @@ import { FormEvent, useContext } from 'react'
 import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 
 export function CoffeeList() {
-  const { coffees, addOrModifyItemToCart } = useContext(CoffeesContext)
+  const { coffees /* addOrModifyItemToCart */ } = useContext(CoffeesContext)
 
   const handleCoffeeImage = (img: string) => {
     if (img === 'Expresso.svg') {
@@ -66,7 +66,7 @@ export function CoffeeList() {
   const handleAddorModifyItemToCart =
     (coffeeId: string) => (event: FormEvent) => {
       event.preventDefault()
-      addOrModifyItemToCart()
+      // addOrModifyItemToCart()
       console.log('enviou')
     }
 
