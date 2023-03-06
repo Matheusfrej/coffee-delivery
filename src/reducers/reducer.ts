@@ -23,7 +23,6 @@ export interface CoffeeType {
 interface CoffeesState {
   coffees: CoffeeType[]
   itemsQuantityOnCart: number
-  // currentQuantity
 }
 
 export function coffeesReducer(state: CoffeesState, action: any) {
@@ -104,6 +103,13 @@ export function coffeesReducer(state: CoffeesState, action: any) {
         draft.coffees.forEach((coffee) => {
           coffee.quantity = 1
         })
+      })
+
+    case ActionsTypes.REMOVE_ITEM_FROM_CART:
+      return produce(state, (draft) => {
+        const coffeeCartIndex = draft.coffees.findIndex((coffee) => coffee.id === action.payload.coffeeId)
+        draft.coffees[coffeeCartIndex].isOnCart = false
+        draft.coffees[coffeeCartIndex].quantityOnCart = 0
       })
       
     default:

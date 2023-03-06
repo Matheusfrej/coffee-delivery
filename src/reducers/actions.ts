@@ -5,6 +5,7 @@ export enum ActionsTypes {
   'MODIFY_QUANTITY' = 'MODIFY_QUANTITY',
   'SUM_ITEMS_ON_CART' = 'SUM_ITEMS_ON_CART',
   'ALL_ITEMS_QUANTITY_TO_1' = 'ALL_ITEMS_QUANTITY_TO_1',
+  'REMOVE_ITEM_FROM_CART' = 'REMOVE_ITEM_FROM_CART'
 }
 
 export const addOrModifyItemToCartAction = (coffeeId:string) => {
@@ -60,5 +61,14 @@ export const allItemsQuantityTo1Action = () => {
   
   return {
     type: ActionsTypes.ALL_ITEMS_QUANTITY_TO_1
+  }
+}
+
+export const removeItemFromCartAction = (coffeeId: string) => {
+  return {
+    type: ActionsTypes.REMOVE_ITEM_FROM_CART,
+    payload: {
+      coffeeId
+    }
   }
 }

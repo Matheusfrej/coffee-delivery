@@ -4,6 +4,7 @@ import {
   allItemsQuantityTo1Action,
   increaseQuantityAction,
   modifyQuantityAction,
+  removeItemFromCartAction,
   subtractQuantityAction,
   sumItemsOnCartAction,
 } from '../reducers/actions'
@@ -18,6 +19,8 @@ interface CoffeesContextType {
   modifyQuantity: (coffeeId: string, quantity: number, page: string) => void
   sumItemsOnCart: () => void
   allItemsQuantityTo1: () => void
+  removeItemFromCart: (coffeeId: string) => void
+  formatToReal: (price: number) => string
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -222,6 +225,14 @@ export function CoffeesContextProvider({
     dispatch(allItemsQuantityTo1Action())
   }
 
+  const removeItemFromCart = (coffeeId: string) => {
+    dispatch(removeItemFromCartAction(coffeeId))
+  }
+
+  const formatToReal = (price: number) => {
+    return price.toFixed(2).replace('.', ',')
+  }
+
   return (
     <CoffeesContext.Provider
       value={{
@@ -233,6 +244,8 @@ export function CoffeesContextProvider({
         modifyQuantity,
         sumItemsOnCart,
         allItemsQuantityTo1,
+        removeItemFromCart,
+        formatToReal,
       }}
     >
       {children}

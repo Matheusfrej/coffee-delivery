@@ -35,8 +35,10 @@ import { CoffeesContext } from '../../contexts/CoffeesContext'
 import { handleCoffeeImage } from '../Home/components/CoffeeList'
 
 export function Checkout() {
-  const { coffees, allItemsQuantityTo1 } = useContext(CoffeesContext)
+  const { coffees, allItemsQuantityTo1, formatToReal, removeItemFromCart } =
+    useContext(CoffeesContext)
   const page = 'checkout'
+  const deliveryTax = 3.5
 
   // set all quantities to 1, only runs once
   useEffect(() => {
@@ -44,6 +46,12 @@ export function Checkout() {
     console.log('entrou no useeffect')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
+
+  const totalCartSum = () => {
+    return coffees.reduce((accumulator, current) => {
+      return accumulator + current.price * current.quantityOnCart
+    }, 0)
+  }
 
   return (
     <CheckoutContainer>
@@ -133,7 +141,9 @@ export function Checkout() {
                               coffeeId={coffee.id}
                               page={page}
                             />
-                            <DeleteButton>
+                            <DeleteButton
+                              onClick={() => removeItemFromCart(coffee.id)}
+                            >
                               <Trash size={16} />
                               <span>REMOVER</span>
                             </DeleteButton>
@@ -141,7 +151,7 @@ export function Checkout() {
                         </div>
                       </CoffeeCard>
                       <span>
-                        R$ {coffee.price.toFixed(2).replace('.', ',')}
+                        R$ {formatToReal(coffee.price * coffee.quantityOnCart)}
                       </span>
                     </CoffeeSelectionContainer>
                     <hr />
@@ -153,15 +163,15 @@ export function Checkout() {
           <Prices>
             <div>
               <p>Total de itens</p>
-              <span>R$ 29,70</span>
+              <span>R$ {formatToReal(totalCartSum())}</span>
             </div>
             <div>
               <p>Entrega</p>
-              <span>R$ 3,50</span>
+              <span>R$ {formatToReal(deliveryTax)}</span>
             </div>
             <div>
               <p>Total</p>
-              <strong>R$ 33,20</strong>
+              <strong>R$ {formatToReal(totalCartSum() + deliveryTax)}</strong>
             </div>
           </Prices>
           <NavLink to="/success" title="Confirmar">

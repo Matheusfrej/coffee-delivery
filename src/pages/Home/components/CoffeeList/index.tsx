@@ -61,7 +61,7 @@ export const handleCoffeeImage = (img: string) => {
 }
 
 export function CoffeeList() {
-  const { coffees, addOrModifyItemToCart, sumItemsOnCart } =
+  const { coffees, addOrModifyItemToCart, sumItemsOnCart, formatToReal } =
     useContext(CoffeesContext)
 
   const page = 'list'
@@ -95,7 +95,7 @@ export function CoffeeList() {
               <CardFooter>
                 <strong>
                   <span>R$</span>
-                  {coffee.price.toFixed(2).replace('.', ',')}
+                  {formatToReal(coffee.price)}
                 </strong>
                 <Actions>
                   <NumberInput
