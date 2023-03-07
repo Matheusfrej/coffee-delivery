@@ -45,7 +45,7 @@ const newAddressFormValidationSchema = zod.object({
   cep: zod.string().min(1),
   street: zod.string().min(1),
   number: zod.string().min(1),
-  complement: zod.string().min(1).optional(),
+  complement: zod.string().optional(),
   neighborhood: zod.string().min(1),
   city: zod.string().min(1),
   uf: zod.string().min(2).max(2),
@@ -106,6 +106,8 @@ export function Checkout() {
       setIsOptionalVisible(false)
     }
   }, [watchComplement, complementDirty, complementInvalid])
+
+  useEffect(() => {}, [formState.isValid])
 
   const handleSubmitUserAddress = (data: NewAddressFormData) => {
     if (!isButtonDisabled) {

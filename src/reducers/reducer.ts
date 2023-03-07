@@ -11,7 +11,7 @@ export enum TagTypes {
 
 export enum PaymentTypes {
   'Credit' = 'Cartão de Crédito',
-  'Debit' = 'Cartão de Dédito',
+  'Debit' = 'Cartão de Débito',
   'Cash' = 'Dinheiro',
 }
 
