@@ -28,6 +28,7 @@ import {
   DeleteButton,
   Prices,
   BaseButtonSelected,
+  ComplementContainer,
 } from './styles'
 
 import { NumberInput } from '../../components/NumberInput'
@@ -44,7 +45,7 @@ const newAddressFormValidationSchema = zod.object({
   cep: zod.string().min(1),
   street: zod.string().min(1),
   number: zod.string().min(1),
-  complement: zod.string().optional(),
+  complement: zod.string().min(1).optional(),
   neighborhood: zod.string().min(1),
   city: zod.string().min(1),
   uf: zod.string().min(2).max(2),
@@ -68,6 +69,8 @@ export function Checkout() {
   const [currentPayment, setCurrentPayment] = useState<
     PaymentTypes | undefined
   >(undefined)
+  const [isOptionalVisible, setIsOptionalVisible] = useState(true)
+
   const navigate = useNavigate()
 
   const newAddressForm = useForm<NewAddressFormData>({
@@ -84,20 +87,25 @@ export function Checkout() {
     mode: 'onChange',
   })
 
-  const { handleSubmit, register, reset, formState } = newAddressForm
+  const { handleSubmit, register, reset, formState, watch, getFieldState } =
+    newAddressForm
 
   const noItemsOnCart = itemsQuantityOnCart === 0
   const noPaymentMethod = currentPayment === undefined
   const isButtonDisabled =
     noItemsOnCart || noPaymentMethod || !formState.isValid
 
+  const watchComplement = watch('complement')
+  const complementDirty = getFieldState('complement').isDirty
+  const complementInvalid = getFieldState('complement').invalid
   useEffect(() => {
-    console.log('Log: ', {
-      noItemsOnCart,
-      noPaymentMethod,
-      formState: formState.isValid,
-    })
-  }, [noItemsOnCart, noPaymentMethod, formState])
+    if (watchComplement === '') {
+      setIsOptionalVisible(true)
+    }
+    if (complementDirty) {
+      setIsOptionalVisible(false)
+    }
+  }, [watchComplement, complementDirty, complementInvalid])
 
   const handleSubmitUserAddress = (data: NewAddressFormData) => {
     if (!isButtonDisabled) {
@@ -167,13 +175,15 @@ export function Checkout() {
                   placeholder="Número"
                   {...register('number')}
                 />
-                <label htmlFor=""></label>
-                <AdjustableInput
-                  id="complement"
-                  type="text"
-                  placeholder="Complemento"
-                  {...register('complement')}
-                />
+                <ComplementContainer>
+                  <AdjustableInput
+                    id="complement"
+                    type="text"
+                    placeholder="Complemento"
+                    {...register('complement')}
+                  />
+                  {isOptionalVisible && <span>Opcional</span>}
+                </ComplementContainer>
               </div>
               <div>
                 <MediumInput

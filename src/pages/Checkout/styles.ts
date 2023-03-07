@@ -269,3 +269,17 @@ export const Prices = styled.div`
     font-size: 1.25rem;
   }
 `
+
+export const ComplementContainer = styled.div`
+  flex: 1;
+  width: 100%;
+
+  span {
+    color: ${(props) => props.theme['base-label']};
+    font-style: italic;
+    font-size: 0.75rem;
+    max-width: fit-content;
+    margin-left: calc(0px - 4.438rem);
+    padding-right: 0.75rem;
+  }
+`
