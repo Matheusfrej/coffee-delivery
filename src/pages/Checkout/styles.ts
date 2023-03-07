@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CheckoutContainer = styled.div`
+export const CheckoutContainer = styled.form`
   margin: 2.5rem 10rem;
   display: flex;
   gap: 2rem;
@@ -74,7 +74,7 @@ export const PaymentContainer = styled(BaseCardHeader)`
   }
 `
 
-export const AddressFormContainer = styled.div`
+export const AddressFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -127,8 +127,8 @@ export const ButtonsContainer = styled.div`
 export const BaseButton = styled.button`
   display: flex;
   gap: 0.75rem;
-  padding: 1rem;
-  border: none;
+  padding: calc(1rem - 1px);
+  border: 1px solid ${(props) => props.theme['base-button']};
   border-radius: 6px;
   align-items: center;
   flex: 1;
@@ -156,6 +156,10 @@ export const BaseButton = styled.button`
   }
 `
 
+export const BaseButtonSelected = styled(BaseButton)`
+  border: 1px solid ${(props) => props.theme.purple};
+`
+
 export const CoffeesSelectedContainer = styled.div``
 
 export const ConfirmationContainer = styled.div`
@@ -172,7 +176,7 @@ export const ConfirmationContainer = styled.div`
     border: 1px solid ${(props) => props.theme['base-button']};
   }
 
-  > a > button {
+  > button {
     width: 100%;
     background: ${(props) => props.theme.yellow};
     font-weight: bold;
@@ -185,8 +189,12 @@ export const ConfirmationContainer = styled.div`
     transition: background-color 0.1s;
     cursor: pointer;
 
-    :hover {
+    :not(:disabled):hover {
       background: ${(props) => props.theme['yellow-dark']};
+    }
+
+    :disabled {
+      cursor: not-allowed;
     }
   }
 `
@@ -221,6 +229,10 @@ export const CoffeeCard = styled.div`
       display: flex;
       flex-direction: row;
       gap: 0.5rem;
+    }
+    > p {
+      font-size: 0.875rem;
+      color: ${(props) => props.theme['base-label']};
     }
   }
 `

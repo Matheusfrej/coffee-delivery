@@ -1,3 +1,5 @@
+import { AddressType, PaymentTypes } from "./reducer"
+
 export enum ActionsTypes {
   'ADD_OR_MODIFY_ITEM_TO_CART' = 'ADD_OR_MODIFY_ITEM_TO_CART',
   'SUBTRACT_QUANTITY' = 'SUBTRACT_QUANTITY',
@@ -5,7 +7,10 @@ export enum ActionsTypes {
   'MODIFY_QUANTITY' = 'MODIFY_QUANTITY',
   'SUM_ITEMS_ON_CART' = 'SUM_ITEMS_ON_CART',
   'ALL_ITEMS_QUANTITY_TO_1' = 'ALL_ITEMS_QUANTITY_TO_1',
-  'REMOVE_ITEM_FROM_CART' = 'REMOVE_ITEM_FROM_CART'
+  'REMOVE_ITEM_FROM_CART' = 'REMOVE_ITEM_FROM_CART',
+  'SUBMIT_BUY' = 'SUBMIT_BUY',
+  'SET_PAYMENT_FORM' = 'SET_PAYMENT_FORM',
+  'RESET_CART' = 'RESET_CART'
 }
 
 export const addOrModifyItemToCartAction = (coffeeId:string) => {
@@ -69,6 +74,16 @@ export const removeItemFromCartAction = (coffeeId: string) => {
     type: ActionsTypes.REMOVE_ITEM_FROM_CART,
     payload: {
       coffeeId
+    }
+  }
+}
+
+export const submitBuyAction = (address: AddressType, paymentMethod: PaymentTypes) => {
+  return {
+    type: ActionsTypes.SUBMIT_BUY,
+    payload: {
+      address,
+      paymentMethod
     }
   }
 }

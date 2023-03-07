@@ -5,14 +5,33 @@ import {
   increaseQuantityAction,
   modifyQuantityAction,
   removeItemFromCartAction,
+  submitBuyAction,
   subtractQuantityAction,
   sumItemsOnCartAction,
 } from '../reducers/actions'
-import { coffeesReducer, CoffeeType, TagTypes } from '../reducers/reducer'
+import {
+  AddressType,
+  coffeesReducer,
+  CoffeeType,
+  PaymentTypes,
+  TagTypes,
+} from '../reducers/reducer'
+
+interface NewAddressData {
+  cep: string
+  street: string
+  number: string
+  complement?: string
+  neighborhood: string
+  city: string
+  uf: string
+}
 
 interface CoffeesContextType {
   coffees: CoffeeType[]
   itemsQuantityOnCart: number
+  userAddress: AddressType | undefined
+  paymentMethod: PaymentTypes | undefined
   addOrModifyItemToCart: (coffeeId: string, page: string) => void
   subtractQuantity: (coffeeId: string, page: string) => void
   increaseQuantity: (coffeeId: string, page: string) => void
@@ -21,6 +40,7 @@ interface CoffeesContextType {
   allItemsQuantityTo1: () => void
   removeItemFromCart: (coffeeId: string) => void
   formatToReal: (price: number) => string
+  submitBuy: (address: AddressType, paymentMethod: PaymentTypes) => void
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -197,9 +217,12 @@ export function CoffeesContextProvider({
       },
     ],
     itemsQuantityOnCart: 0,
+    userAddress: undefined,
+    paymentMethod: undefined,
   })
 
-  const { coffees, itemsQuantityOnCart } = coffeesState
+  const { coffees, itemsQuantityOnCart, userAddress, paymentMethod } =
+    coffeesState
 
   const addOrModifyItemToCart = (coffeeId: string) => {
     dispatch(addOrModifyItemToCartAction(coffeeId))
@@ -233,11 +256,26 @@ export function CoffeesContextProvider({
     return price.toFixed(2).replace('.', ',')
   }
 
+  const submitBuy = (data: NewAddressData, paymentMethod: PaymentTypes) => {
+    const newAddress: AddressType = {
+      cep: data.cep,
+      street: data.street,
+      number: data.number,
+      complement: data.complement,
+      neighborhood: data.neighborhood,
+      city: data.city,
+      uf: data.uf,
+    }
+    dispatch(submitBuyAction(newAddress, paymentMethod))
+  }
+
   return (
     <CoffeesContext.Provider
       value={{
         coffees,
         itemsQuantityOnCart,
+        userAddress,
+        paymentMethod,
         addOrModifyItemToCart,
         subtractQuantity,
         increaseQuantity,
@@ -246,6 +284,7 @@ export function CoffeesContextProvider({
         allItemsQuantityTo1,
         removeItemFromCart,
         formatToReal,
+        submitBuy,
       }}
     >
       {children}

@@ -9,6 +9,12 @@ export enum TagTypes {
   'ALCOÓLICO' = 'ALCOÓLICO',
 }
 
+export enum PaymentTypes {
+  'Credit' = 'Cartão de Crédito',
+  'Debit' = 'Cartão de Dédito',
+  'Cash' = 'Dinheiro',
+}
+
 export interface CoffeeType {
   id: string
   img: string
@@ -20,8 +26,21 @@ export interface CoffeeType {
   quantity: number
   quantityOnCart: number
 }
+
+export interface AddressType {
+  cep: string
+  street: string
+  number: string
+  complement?: string
+  neighborhood: string
+  city: string
+  uf: string
+}
+
 interface CoffeesState {
   coffees: CoffeeType[]
+  userAddress: AddressType | undefined
+  paymentMethod: PaymentTypes | undefined
   itemsQuantityOnCart: number
 }
 
@@ -111,7 +130,19 @@ export function coffeesReducer(state: CoffeesState, action: any) {
         draft.coffees[coffeeCartIndex].isOnCart = false
         draft.coffees[coffeeCartIndex].quantityOnCart = 0
       })
-      
+    
+    case ActionsTypes.SUBMIT_BUY:
+      return produce(state, (draft) => {
+        draft.userAddress = action.payload.address
+        draft.paymentMethod = action.payload.paymentMethod
+
+        draft.coffees.forEach((coffee) => {
+          coffee.isOnCart = false
+          coffee.quantityOnCart = 0
+        })
+        draft.itemsQuantityOnCart = 0
+      })
+
     default:
       return state
   }
