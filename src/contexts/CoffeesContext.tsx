@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import {
   addOrModifyItemToCartAction,
   allItemsQuantityTo1Action,
@@ -223,6 +223,12 @@ export function CoffeesContextProvider({
 
   const { coffees, itemsQuantityOnCart, userAddress, paymentMethod } =
     coffeesState
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(coffeesState)
+
+    localStorage.setItem('@coffee-delivery:coffeesState', stateJSON)
+  }, [coffeesState])
 
   const addOrModifyItemToCart = (coffeeId: string) => {
     dispatch(addOrModifyItemToCartAction(coffeeId))
