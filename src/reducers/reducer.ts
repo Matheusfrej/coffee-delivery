@@ -97,8 +97,8 @@ export function coffeesReducer(state: CoffeesState, action: any) {
             draft.coffees[coffeeCartIndex].quantity = 1
           }
         } else {
-          if (action.payload.quantityOnCart >= 1) {
-            draft.coffees[coffeeCartIndex].quantityOnCart = action.payload.quantityOnCart
+          if (action.payload.quantity >= 1) {
+            draft.coffees[coffeeCartIndex].quantityOnCart = action.payload.quantity
           } else {
             draft.coffees[coffeeCartIndex].quantityOnCart = 1
           }
