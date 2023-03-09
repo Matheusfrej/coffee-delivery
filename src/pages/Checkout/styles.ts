@@ -243,6 +243,7 @@ export const ConfirmationContainer = styled.div`
   @media (max-width: 768px) {
     width: 80%;
     margin: auto;
+    margin-top: 1rem;
   }
 `
 
@@ -292,6 +293,9 @@ export const CoffeeCard = styled.div`
     > p {
       font-size: 0.875rem;
       color: ${(props) => props.theme['base-label']};
+      @media (max-width: 768px) {
+        text-align: center;
+      }
     }
   }
 
