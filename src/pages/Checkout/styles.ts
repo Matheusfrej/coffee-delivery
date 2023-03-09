@@ -11,10 +11,21 @@ export const CheckoutContainer = styled.form`
     font-weight: bold;
     font-size: 1.125rem;
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+  }
 `
 
 export const AddressAndPayment = styled.div`
   width: 40rem;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `
 
 export const BaseCardContainer = styled.div`
@@ -84,6 +95,32 @@ export const AddressFormContainer = styled.form`
     gap: 0.75rem;
     align-items: center;
   }
+
+  @media (max-width: 768px) {
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    > div:last-child {
+      display: flex;
+      flex-direction: row;
+
+      input {
+        width: 40%;
+      }
+
+      input:last-child {
+        width: 20%;
+      }
+    }
+
+    display: flex;
+    flex-direction: column;
+    input {
+      width: 100%;
+    }
+  }
 `
 
 export const BaseInput = styled.input`
@@ -122,6 +159,11 @@ export const AdjustableInput = styled(BaseInput)`
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 0.75rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export const BaseButton = styled.button`
@@ -197,6 +239,11 @@ export const ConfirmationContainer = styled.div`
       cursor: not-allowed;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 80%;
+    margin: auto;
+  }
 `
 
 export const CoffeeSelectionContainer = styled.div`
@@ -207,6 +254,13 @@ export const CoffeeSelectionContainer = styled.div`
 
   > span {
     font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 `
 
@@ -224,7 +278,12 @@ export const CoffeeCard = styled.div`
     gap: 0.5rem;
     > span {
       color: ${(props) => props.theme['base-subtitle']};
+
+      @media (max-width: 768px) {
+        text-align: center;
+      }
     }
+
     > div {
       display: flex;
       flex-direction: row;
@@ -234,6 +293,12 @@ export const CoffeeCard = styled.div`
       font-size: 0.875rem;
       color: ${(props) => props.theme['base-label']};
     }
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `
 
@@ -267,6 +332,14 @@ export const Prices = styled.div`
     color: ${(props) => props.theme['base-subtitle']};
     font-weight: bold;
     font-size: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 `
 

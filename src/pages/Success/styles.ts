@@ -21,6 +21,22 @@ export const SuccessContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 1.75rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
   }
 `
 
@@ -85,5 +101,9 @@ export const Informations = styled.div`
     svg {
       background: ${(props) => props.theme['yellow-dark']};
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `

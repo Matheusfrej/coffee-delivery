@@ -16,12 +16,26 @@ export const CoffeeListContainer = styled.div`
     font-weight: bolder;
     font-size: 2rem;
   }
+
+  @media (max-width: 768px) {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 export const CoffeeCardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-row-gap: 2.5rem;
   grid-column-gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const Card = styled.div`

@@ -6,11 +6,26 @@ export const IntroContainer = styled.div`
   justify-content: space-between;
   height: 34rem;
   background-size: 100%;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `
 
 export const IntroMainContainer = styled(IntroContainer)`
   width: 100%;
   margin: 10rem;
+
+  @media (max-width: 768px) {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    img {
+      width: 100%;
+    }
+  }
 `
 
 export const TitleAndAdvantagesContainer = styled.div`
@@ -18,6 +33,10 @@ export const TitleAndAdvantagesContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 2.5rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 export const Titles = styled.div`
@@ -36,6 +55,14 @@ export const Titles = styled.div`
     color: ${(props) => props.theme['base-subtitle']};
     font-size: 1.25rem;
     font-weight: normal;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    h1,
+    h2 {
+      text-align: center;
+    }
   }
 `
 
@@ -90,5 +117,12 @@ export const Advantages = styled.div`
     svg {
       background: ${(props) => props.theme.purple};
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
   }
 `

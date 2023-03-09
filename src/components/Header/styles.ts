@@ -6,6 +6,10 @@ export const HeaderContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 2rem 10rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
 `
 
 export const ActionsContainer = styled.div`
